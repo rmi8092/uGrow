@@ -87,20 +87,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Toolbar -->
             <paper-toolbar id="drawerToolbar">
-                <span class="toolbar__logo toolbar__logo--home"></span>
+                <span class="toolbar__logo toolbar__logo--menu"></span>
             </paper-toolbar>
 
             <!-- Drawer Content -->
             <paper-menu>
-                <a>
+                <a href="profile.php">
                     <iron-icon icon="face"></iron-icon>
                     <span>Perfil</span>
                 </a>
-                <a>
+                <a href="offer.php">
                     <iron-icon icon="shopping-basket"></iron-icon>
                     <span>Publicar Recolecta</span>
                 </a>
-                <a>
+                <a href="settings.php">
                     <iron-icon icon="settings"></iron-icon>
                     <span>Settings</span>
                 </a>

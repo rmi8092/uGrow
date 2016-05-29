@@ -88,24 +88,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Toolbar -->
             <paper-toolbar id="drawerToolbar">
-                <span class="toolbar__logo toolbar__logo--home"></span>
+                <span class="toolbar__logo toolbar__logo--menu"></span>
             </paper-toolbar>
 
             <!-- Drawer Content -->
-            <paper-menu attr-for-selected="data-route" selected="[[route]]">
-                <a data-route="profile" href="{{baseUrl}}profile">
+            <paper-menu>
+                <a  href="profile.php">
                     <iron-icon icon="face"></iron-icon>
                     <span>Perfil</span>
                 </a>
-                <a data-route="publish" href="{{baseUrl}}publish">
+                <a href="offer.php">
                     <iron-icon icon="shopping-basket"></iron-icon>
                     <span>Publicar Recolecta</span>
                 </a>
-                <a data-route="settings" href="{{baseUrl}}settings">
+                <a href="settings.php">
                     <iron-icon icon="settings"></iron-icon>
                     <span>Settings</span>
                 </a>
-                <a data-route="logout" href="{{baseUrl}}logout">
+                <a>
                     <iron-icon icon="exit-to-app"></iron-icon>
                     <span>Logout</span>
                 </a>

@@ -15,11 +15,6 @@
 	font-size: 64px;
 }
 
-.toolbar__logo--home {
-	margin-bottom: 6%;
-    margin-left: 20%;
-}
-
 .profile__basic, .profile__offer, .profile__map, .profile__opinions, .profile__tips, .profile__future {
 	width: 96%;
 	margin: 2% 2%;
