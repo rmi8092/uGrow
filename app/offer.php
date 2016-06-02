@@ -77,11 +77,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-            <span class="toolbar__logo toolbar__logo--home"></span>
+            <span class="toolbar__logo toolbar__logo--menu"></span>
         </paper-toolbar>
 
         <!-- Drawer Content -->
         <paper-menu>
+<<<<<<< HEAD
           <a  href="profile.php">
               <iron-icon icon="face"></iron-icon>
               <span>Perfil</span>
@@ -99,6 +100,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <span>Logout</span>
           </a>
       </paper-menu>
+=======
+            <a  href="profile.php">
+                <iron-icon icon="face"></iron-icon>
+                <span>Perfil</span>
+            </a>
+            <a href="offer.php">
+                <iron-icon icon="shopping-basket"></iron-icon>
+                <span>Publicar Recolecta</span>
+            </a>
+            <a href="settings.php">
+                <iron-icon icon="settings"></iron-icon>
+                <span>Settings</span>
+            </a>
+            <a>
+                <iron-icon icon="exit-to-app"></iron-icon>
+                <span>Logout</span>
+            </a>
+        </paper-menu>
+>>>>>>> ecd8e89c232a56d7793d6f65c33711165e23b1df
     </paper-scroll-header-panel>
 
       <!-- Main Area -->

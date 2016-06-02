@@ -78,7 +78,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Content -->
             <paper-menu>
+<<<<<<< HEAD
                 <a  href="profile.php">
+=======
+                <a href="profile.php">
+>>>>>>> ecd8e89c232a56d7793d6f65c33711165e23b1df
                     <iron-icon icon="face"></iron-icon>
                     <span>Perfil</span>
                 </a>
