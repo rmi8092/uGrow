@@ -173,8 +173,8 @@
 	    line-height: 32px;
 	}
 
-	.form__town, .form__search, .form__offer {
-		width: 20%;
+	.form__town, .form__search {
+		width: 31%;
 		display: inline-block;
 		margin-left: 2%;
 	}
@@ -229,8 +229,8 @@
 	    line-height: 32px;
 	}
 
-	.form__town, .form__search, .form__offer {
-		width: 20%;
+	.form__town, .form__search {
+		width: 31%;
 		display: inline-block;
 		margin-left: 2%;
 	}

@@ -4,11 +4,11 @@
 */
 class City 
 {
-	$_connexion = "";
+	private $_connexion = "";
 
-	function __construct()
+	public function __construct()
 	{
-		$this->_connexion = new Connexion();
+		$this->_connexion = new Conexion();
 	}
 
 	private function getAll()
@@ -19,12 +19,27 @@ class City
 	public function createOptions($name)
 	{
 		$cities = $this->getAll();
+		
 		foreach ($cities as $key => $city) {
-			?>
-			<option name="<?php echo $name; ?>" value="<?php echo $city['id'];?>"><?php echo $city['city'];?></option>
-			<?php
+			echo "<option name='".$name."' value='".$city['id']."'>".$city['city']."</option>";
 		}
 		
+	}
+
+	public function get_id($dir)
+	{
+		$lower = strtolower($dir);
+		$all = $this->getAll();
+		foreach ($all as $key => $city) {
+			if(strtolower($city['city'])==$lower){
+				return $city['id'];
+			}
+		}
+		return 0;
+	}
+
+	public function get($id){
+		return $this->_connexion->query(GET_CITY_FOR_ID, array(":id"=>$id));
 	}
 
 }

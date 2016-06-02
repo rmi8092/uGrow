@@ -4,17 +4,17 @@
 */
 class Tip 
 {
-	$_connexion;
+	private $_connexion;
 
-	function __construct(argument)
+	public function __construct()
 	{
-		$this->_connexion = new Connexion();
+		$this->_connexion = new Conexion();
 	}
 
-	public function add($idUser, $title, $content)
+	public function add($idUser, $title, $content, $link)
 	{
 		$date = date('d-m-Y');
-		$this->_connexion->query(ADD_TIP,array(":idUser" => $idUser, ":title" => $title, ":content" => $content));
+		$this->_connexion->query(ADD_TIP,array(":idUser" => $idUser, ":title" => $title, ":date" => $date, ":content" => $content, ":link" => $link));
 	}
 
 	private function get_forUser($idUser)
@@ -43,6 +43,7 @@ class Tip
 
 	private function get_recent()
 	{
+		return $this->_connexion->query(GET_TIPS_RECENTS,array());
 		$all = $this->getAll();
 		$recent = array();
 		$count = 0;
@@ -58,14 +59,17 @@ class Tip
 
 	public function show_recent()
 	{
+		
 		$recent = $this->get_recent();
 		foreach ($recent as $key => $tip) {
+			$random = rand(1,8);
 			?>
-			<div>
-				<h1><?php echo $tip['title'];?></h1>
-				<p><?php echo $tip['content'];?></p>
-				<p><?php echo $tip['date'];?></p>
-			</div>
+			<a href="http://<?php echo $tip['link'];?>" target="blank"><paper-card heading="<?php echo $tip['title'];?>" image="./images/tip<?php echo $random;?>.jpg" class="tips__tip">
+                  <div class="card-content" style="color: #222;">
+                    <?php echo $tip['content'];?>
+                  </div>
+                </paper-card></a>
+			
 			<?php
 		}
 	}

@@ -155,6 +155,8 @@ window.addEventListener("load", function(){
 	var publishSection = document.getElementById("publish");
 	var closeSection = document.getElementById("close");
 
+	console.log(infoTabSm);
+
 	infoTabLg.addEventListener("click", function(){
 		showSelectedSection(infoSection);
 	});

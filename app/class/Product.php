@@ -5,14 +5,14 @@
 	*/
 	class Product
 	{
-		$_connexion;
+		private $_connexion;
 
-		function __construct()
+		public function __construct()
 		{
-			$this->_connexion = new Connexion();
+			$this->_connexion = new Conexion();
 		}
 
-		private function getAll()
+		public function getAll()
 		{
 			return $this->_connexion->query(ALL_PRODUCTS, array());
 		}
@@ -21,10 +21,18 @@
 		{
 			$products = $this->getAll();
 			foreach ($products as $key => $product) {
-				?>
-				<option name="<?php echo $name; ?>" value="<?php echo $product['id'];?>"><?php echo $product['product'];?></option>
-				<?php
+				echo "<option name='".$name."' value='".$product['id']."'>".$product['product']."</option>";
 			}
+		}
+
+		public function returnOptions($name)
+		{
+			$products = $this->getAll();
+			$result = "";
+			foreach ($products as $key => $product) {
+				$result .= "<option name='".$name."' value='".$product['id']."'>".$product['product']."</option>";
+			}
+			return $result;
 		}
 
 		public function add($product_new)

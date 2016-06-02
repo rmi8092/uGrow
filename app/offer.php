@@ -8,7 +8,13 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<?php
+  include("includes/incl.php");
+  if(isset($_POST['offer'])){
+    $offer = new Offer();
+    $offer->add($_SESSION['user'][0]['id'], $_POST['products'], $_POST['weight']);
+  }
+?>
 <html lang="en">
 
 <head>
@@ -75,12 +81,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu attr-for-selected="data-route" selected="[[route]]">
-            <a data-route="logout" href="{{baseUrl}}logout">
-                <iron-icon icon="exit-to-app"></iron-icon>
-                <span>Logout</span>
-            </a>
-        </paper-menu>
+        <paper-menu>
+          <a  href="profile.php">
+              <iron-icon icon="face"></iron-icon>
+              <span>Perfil</span>
+          </a>
+          <a href="offer.php">
+              <iron-icon icon="shopping-basket"></iron-icon>
+              <span>Publicar Recolecta</span>
+          </a>
+          <a href="settings.php">
+              <iron-icon icon="settings"></iron-icon>
+              <span>Settings</span>
+          </a>
+          <a>
+              <iron-icon icon="exit-to-app"></iron-icon>
+              <span>Logout</span>
+          </a>
+      </paper-menu>
     </paper-scroll-header-panel>
 
       <!-- Main Area -->
@@ -117,14 +135,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-card class="card-offer">
                     <div class="card-offer__content">
                         <h3 class="card-offer__header">Ofrecer Producto</h3>
-                        <form method="post" action="/offer.php" id="form">
+                        <form method="post" action="offer.php" id="form">
                             <paper-dropdown-menu label="Producto">
-                                <paper-listbox class="dropdown-content" selected="1">
-                                    <paper-item>Acelga</paper-item>
-                                    <paper-item>Tomate</paper-item>
-                                    <paper-item>Zanahoria</paper-item>
-                                    <paper-item>Lechuga</paper-item>
-                                </paper-listbox>
+                                <select class="dropdown-content" name="products">
+                                    <?php 
+                                      $products=new Product();
+                                      $products->createOptions("products");
+                                    ?>
+                                </select>
                             </paper-dropdown-menu>
                             <paper-input id="weight" class="card-offer__weight" name="weight" label="Kilos disponibles" required>Kilos disponibles</paper-input>
                             <div class="ripple-con">

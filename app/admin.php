@@ -71,7 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-            <span class="toolbar__logo toolbar__logo--home"></span>
+            <span class="toolbar__logo toolbar__logo--menu"></span>
         </paper-toolbar>
 
         <!-- Drawer Content -->

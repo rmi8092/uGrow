@@ -16,6 +16,7 @@
         private $_description;
         private $_location;
         private $_register;
+        private $_city;
 		private $_conexion;
         
 		public function __construct()
@@ -23,7 +24,7 @@
 			$this->_conexion = new Conexion();
 		}
 		
-        public function register($name, $lastname, $user, $password, $email, $birthdate, $description, $location)
+        public function register($name, $lastname, $user, $password, $email, $birthdate, $description, $location, $city)
         {
             $users = $this->getAllUsers();
             foreach ($users as $value) {
@@ -41,6 +42,7 @@
             $this->set_picture("");
             $this->set_description($description);
             $this->set_location($location);
+            $this->_city = $city;
             $this->set_register();
             $this->setUserBD();
             return true;
@@ -68,12 +70,13 @@
             if($name==""){ $name=$user_obj['name'];}
             if($lastname==""){ $lastname=$user_obj['lastname'];}
             if($new_user==""){ $new_user=$user_obj['user'];}
-            if($password==""){ $password=$user_obj['password'];}else{
-                $password==md5($password);
+            if($password==""){ $password=$user_obj['password'];}
+            else{
+                $password=md5($password);
             }
             if($email==""){ $email=$user_obj['email'];}
             if($birthdate==""){ $birthdate=$user_obj['birthdate'];}
-            if($description==""){ $description=$user_obj['description'];}
+            if($description==""){ $description=$user_obj[0]['description'];}
             if($location==""){ $location=$user_obj['location'];}
 
             $this->_conexion->query(MODIFY_USER, array(":name" => $name, ":lastname" => $lastname, ":new_user" => $new_user, ":password" => $password, ":email" => $email, ":birthdate" => $birthdate, ":description" => $description, ":location" => $location, ":user" => $user));
@@ -86,7 +89,7 @@
             $this->_conexion->query(INSERTAR_USUARIO, array(":user" => $this->get_user(), ":password" => $this->get_password(),":name" => $this->get_name(), "lastname" => $this->get_lastname(),
                  ":email" => $this->get_email(), ":birthdate" => $this->get_birthdate(),
                 ":trades" => $this->get_trades(), ":rating" => $this->get_rating(), ":picture" => $this->get_picture(),
-                ":description" => $this->get_description(), ":location" => $this->get_location(), ":register" => $this->get_register()));
+                ":description" => $this->get_description(), ":location" => $this->get_location(), ":register" => $this->get_register(), ":city" => $this->_city));
         }
 
         private function getAllUsers()
@@ -94,8 +97,29 @@
             return  $this->_conexion->query(TODOS_USUARIOS_USER, array());
         }
 
-        private function getUser_forUserName($user){
+        public function getUser_forUserName($user)
+        {
             return $this->_conexion->query(GET_USER_USERNAME, array(":user"=>$user));
+        }
+
+        public function getUser_forId($id)
+        {
+            return $this->_conexion->query(GET_USER_ID, array(":id"=>$id));
+        }
+
+        public function close_account($id)
+        {
+            return $this->_conexion->query(CLOSE_ACCOUNT, array(":id"=>$id));
+        }
+
+        public function get_for_location($dir)
+        {
+            return $this->_conexion->query(GET_USER_ID_FOR_DIR, array(":idCity"=>$dir));
+        }
+
+        public function getAllUser_forId($id){
+            return $this->_conexion->query(GETALL_USER_ID, array(":id"=>$id));
+
         }
 
         

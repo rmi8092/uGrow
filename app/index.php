@@ -8,7 +8,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<?php include("includes/incl.php");?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -58,8 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="toolbar__logo"></div>
                 </div>
                 <div class="toolbar__links">
-                    <a href="#" class="toolbar__left" "Inicia Sesión">Inicia Sesión</a> <!-- hacer página de inicio sesion y enlazar aqui -->
-                    <a href="register.php" class="toolbar__right" "Regístrate">Regístrate</a>
+                    <?php include("includes/header.php");?>
                 </div>
             </paper-toolbar>
             <div class="wellcome-image">
@@ -68,10 +67,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <paper-card class="card">
                 <div class="card__content">
-                    <form method="post" action="home.html" id="form">
-                        <paper-input class="card__town" name="town" label="Localidad" required>Localidad</paper-input>
+                    <form method="post" action="home.php" id="form">
+                        <paper-input class="card__town" name="town" label="Localidad" >Localidad</paper-input>
                         <paper-input class="card__search" name="search" label="Busco" required>Busco</paper-input>
-                        <paper-input class="card__offer" name="offer" label="Ofrezco" required>Ofrezco</paper-input>
+                        
                         <div class="ripple-con">
                             <input class="btn" type="submit" name="recolecta" value="Recolecta!"> <!-- poner disabled="true" cuando haya visto Emanuel el efecto ripple-->
                             <span class="ripple"></span>

@@ -8,7 +8,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<?php include("includes/incl.php");?>
 <html lang="en">
 
 <head>
@@ -117,9 +117,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-card class="card-session">
                     <div class="card-session__content">
                         <h3 class="card-session__header">Inicia Sesión</h3>
-                        <form method="post" action="/index.php" id="form">
+                        <form method="post" action="index.php" id="form">
                             <paper-input name="user" label="Usuario" required>Usuario</paper-input>
-                            <paper-input type="password" name="user" label="Password" required>Password</paper-input>
+                            <paper-input type="password" name="password" label="Password" required>Password</paper-input>
                             <div class="ripple-con">
                                 <input id="session" class="btn" type="submit" name="session" value="Entrar"> <!-- poner disabled="true" cuando haya visto Emanuel el efecto ripple-->
                                 <span class="ripple"></span>

@@ -8,6 +8,12 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
+<?php 
+include("includes/incl.php");
+if(!isset($_POST['recolecta'])){
+  header("Location: index.php");
+}
+?>
 
 <html lang="en">
 
@@ -58,6 +64,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
+
+  <link rel="stylesheet" type="text/css" href="styles/popup.css">
 </head>
 
 <body unresolved>
@@ -74,24 +82,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu attr-for-selected="data-route" selected="[[route]]">
-          <a data-route="profile" href="{{baseUrl}}profile">
-              <iron-icon icon="face"></iron-icon>
-              <span>Perfil</span>
-          </a>
-          <a data-route="publish" href="{{baseUrl}}publish">
-              <iron-icon icon="shopping-basket"></iron-icon>
-              <span>Publicar Recolecta</span>
-          </a>
-          <a data-route="settings" href="{{baseUrl}}settings">
-              <iron-icon icon="settings"></iron-icon>
-              <span>Settings</span>
-          </a>
-          <a data-route="logout" href="{{baseUrl}}logout">
-              <iron-icon icon="exit-to-app"></iron-icon>
-              <span>Logout</span>
-          </a>
-        </paper-menu>
+        <paper-menu>
+	        <a  href="profile.php">
+	            <iron-icon icon="face"></iron-icon>
+	            <span>Perfil</span>
+	        </a>
+	        <a href="offer.php">
+	            <iron-icon icon="shopping-basket"></iron-icon>
+	            <span>Publicar Recolecta</span>
+	        </a>
+	        <a href="settings.php">
+	            <iron-icon icon="settings"></iron-icon>
+	            <span>Settings</span>
+	        </a>
+	        <a>
+	            <iron-icon icon="exit-to-app"></iron-icon>
+	            <span>Logout</span>
+	        </a>
+    	</paper-menu>
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
@@ -128,15 +136,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         --paper-card-header-color: #fff;
                     }
                 </style>
-                <a href="mailto:joe@example.com?subject=feedback"><paper-card heading="Pre-fab homes" image="./images/tip3.jpg" class="tips__tip"></paper-card></a>
+                <?php 
+                  $tip_obj = new Tip();
+                  $tip_obj->show_recent();
+                ?>
             </paper-card>
             <div class="sticky-anchor"></div>
             <div class="search-results">
                 <paper-card id="sticky" class="form">
-                    <form method="post" action="home.html" id="form">
-                        <paper-input class="form__town" name="town" label="Localidad" required>Localidad</paper-input>
+                    <form method="post" action="home.php" id="form">
+                        <paper-input class="form__town" name="town" label="Localidad" >Localidad</paper-input>
                         <paper-input class="form__search" name="search" label="Busco" required>Busco</paper-input>
-                        <paper-input class="form__offer" name="offer" label="Ofrezco" required>Ofrezco</paper-input>
+                        
                         <div class="ripple-con">
                             <input class="btn" type="submit" name="recolecta" value="Recolecta!"> <!-- poner disabled="true" cuando haya visto Emanuel el efecto ripple-->
                             <span class="ripple"></span>
@@ -145,7 +156,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </paper-card>
                 <div class="results">
                 	<!-- <my-search image="./images/1.jpg" name="Amanda Lopez" location="Priego de Córdoba" about="Blablablablablablabla blablablab" product="Calabacín" amount="15"></my-search> -->
-                    <div class="results__item">
                         <style is="custom-style">
                             .results__name { @apply(--paper-font-headline); }
                             .results__location { color: var(--paper-grey-600); }
@@ -157,138 +167,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             iron-icon.star:last-of-type { color: var(--paper-grey-500); }
                             .results__button { color: var(--primary-color); }
                         </style>
-                        <paper-card image="./images/1.jpg">
-                            <div class="card-content">
-                                <div class="results__name"><a href="#">Amanda Lopez</a> <!-- redirigir al profile del user -->
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button> <!-- cambiar a input type="submit" e intentar reproducir el efecto -->
-                            </div>
-                        </paper-card>
-                    </div>
-                    <div class="results__item">
-                        <paper-card image="./images/2.jpg">
-                            <div class="card-content">
-                                <div class="results__name">Amanda Lopez
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button>
-                            </div>
-                        </paper-card>
-                    </div>
-                    <div class="results__item">
-                        <paper-card image="./images/3.jpg">
-                            <div class="card-content">
-                                <div class="results__name">Amanda Lopez
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button>
-                            </div>
-                        </paper-card>
-                    </div>
-                    <div class="results__item">
-                        <paper-card image="./images/4.jpg">
-                            <div class="card-content">
-                                <div class="results__name">Amanda Lopez
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button>
-                            </div>
-                        </paper-card>
-                    </div>
-                    <div class="results__item">
-                        <paper-card image="./images/5.jpg">
-                            <div class="card-content">
-                                <div class="results__name">Amanda Lopez
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button>
-                            </div>
-                        </paper-card>
-                    </div>
-                    <div class="results__item">
-                        <paper-card image="./images/6.jpg">
-                            <div class="card-content">
-                                <div class="results__name">Amanda Lopez
-                                    <div class="results__location">
-                                        <iron-icon icon="icons:room"></iron-icon>
-                                        <span>Priego de Córdoba</span>
-                                    </div>
-                                </div>
-                                <div class="results__stars">
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                    <iron-icon class="star" icon="star"></iron-icon>
-                                </div>
-                                <p class="results__about">Tengo más de diez años de experiencia en horticultura urbana, el ecologismo es mi pasión, todas mis recolectas son sostenibles.</p>
-                            </div>
-                            <div class="card-actions">
-                                <div class="results__product">Calabacín</div><div class="results__amount">15kg</div>
-                                <paper-button class="results__button dealButton">Me interesa!</paper-button>
-                            </div>
-                        </paper-card>
-                    </div>
-                </div>
+                        <?php 
+                          if(isset($_POST['recolecta'])){
+                            $offer_obj = new Offer();
+                            echo $offer_obj->show($_POST['town'], $_POST['search']);
+                          }
+                        ?>
             </div>
             
 
@@ -384,8 +268,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- build:js scripts/app.js -->
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script src="scripts/home.js"></script>
+  
   <!-- endbuild-->
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+
+      
+      setTimeout(function(){
+        var botones = document.getElementsByClassName('dealButton');
+      console.log(botones);
+        for(var i=0; i<botones.length; i++){
+          var id = botones[i].getAttribute("go");
+          console.log(botones[i]);
+          botones[i].addEventListener("click", function(){
+            var popup = document.getElementById(id);
+            popup.style.display="block";
+          });
+        }
+      }, 2000);
+      
+
+    });
+
+  </script>
 </body>
 
 </html>

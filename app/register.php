@@ -23,7 +23,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 $_POST['mail'],
                 $_POST['birthdate'],
                 $_POST['description'],
-                $_POST['address']
+                $_POST['address'],
+                $_POST['city']
             );
             if($is_registered){
                 header("Location: index.php");
@@ -124,16 +125,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             <paper-input id="mail" class="card__mail" name="mail" label="Mail" required>Mail</paper-input>
                             <paper-input  id="birthdate" class="card__birthdate" name="birthdate" label="Fecha nacimiento" required>Fecha nacimiento</paper-input>
                             <paper-input id="address" class="card__address" name="address" label="Dirección huerto" required>Dirección huerto</paper-input>
-                            <paper-dropdown-menu label="Producto">
-                                <paper-listbox class="dropdown-content" selected="1">
-                                    <paper-item>Córdoba</paper-item>
-                                    <paper-item>Sevilla</paper-item>
-                                </paper-listbox>
+                            <paper-dropdown-menu label="Ciudad">
+                                <select class="dropdown-content" name="city">
+                                    <?php 
+                                    	$city = new City();
+                                    	$city->createOptions("city");
+                                    ?>
+                                </select>
                             </paper-dropdown-menu>
                             <iron-autogrow-textarea class="card__about" name="description" rows="4" placeholder="Descripción"></iron-autogrow-textarea>
                             <paper-checkbox  id="checkbox" class="checkbox">Acepto las condiciones</paper-checkbox>
                             <div class="ripple-con">
-                                <input class="btn" type="submit" disabled="true" value="Registrar">
+                                <input class="btn" type="submit" name="register" value="Registrar">
                                 <span class="ripple"></span>
                             </div>
                         </form>

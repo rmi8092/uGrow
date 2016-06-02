@@ -10,20 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <?php
     include("includes/incl.php");
-    if(isset($_POST['modify'])){
-        $user = new User();
-        $user->modify(
-                'fonty',//cambiar por el de la sesion cuando exista
-                $_POST['name'],
-                $_POST['surname'],
-                $_POST['user'],
-                $_POST['password'],
-                $_POST['mail'],
-                $_POST['birthdate'],
-                $_POST['description'],
-                $_POST['address']
-            );
-    }
+    include("includes/settings_controls.php");
 ?>
 
 <html lang="en">
@@ -79,7 +66,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body unresolved>
     <span id="browser-sync-binding"></span>
-    <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel" force-narrow="true">
         <!-- Drawer Scroll Header Panel -->
@@ -87,20 +73,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Toolbar -->
             <paper-toolbar id="drawerToolbar">
-                <span class="toolbar__logo toolbar__logo--home"></span>
+                <span class="toolbar__logo toolbar__logo--menu"></span>
             </paper-toolbar>
 
             <!-- Drawer Content -->
             <paper-menu>
-                <a>
+                <a  href="profile.php">
                     <iron-icon icon="face"></iron-icon>
                     <span>Perfil</span>
                 </a>
-                <a>
+                <a href="offer.php">
                     <iron-icon icon="shopping-basket"></iron-icon>
                     <span>Publicar Recolecta</span>
                 </a>
-                <a>
+                <a href="settings.php">
                     <iron-icon icon="settings"></iron-icon>
                     <span>Settings</span>
                 </a>
@@ -202,20 +188,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-card class="card" elevation="1">
                         <div class="card__content">
                             <h3 class="card__header">Edita tus datos</h3>
-                            <p id="error">
-	                            <?php 
-	                                if(isset($err_pass)){
-	                                    if($err_pass){
-	                                        echo "Las contraseñas no coinciden.";
-	                                    }
-
-	                                    if($err_register){
-	                                        echo "El usuario ya existe.";
-	                                    }
-	                                }
-	                            ?>
-	                        </p>
-                            <form method="post" action="/proyect/uGrow/app/settings.php" id="form">
+                            <form method="post" action="settings.php" id="form">
                                 <paper-input class="card__name" name="name" label="Nombre" required>Nombre</paper-input>
                                 <paper-input class="card__surname" name="surname" label="Apellidos" required>Apellidos</paper-input>
                                 <paper-input class="card__user" name="user" label="Usuario" required>Usuario</paper-input>
@@ -237,12 +210,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-card class="card" elevation="1">
                         <div class="card__content">
                             <h3 class="card__header">Elige Tu foto</h3>
-                            <form method="post" action="settings.php" id="form">
+                            <form method="post" action="settings.php" id="form" enctype='multipart/form-data'>
                                 <paper-input label="Foto" type="file"
-                                    placeholder="Elija su foto de perfil">
+                                    placeholder="Elija su foto de perfil" name="img">
                                 </paper-input>
                                 <div class="ripple-con">
-	                                <input class="btn" type="submit" name="save" value="Guardar">
+	                                <input class="btn" type="submit" name="save_img" value="Guardar">
 	                                <span class="ripple"></span>
 	                            </div>
                             </form>
@@ -254,9 +227,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <div class="card__content">
                             <h3 class="card__header">Inserta Un Tip</h3>
                             <form method="post" action="settings.php" id="form">
-                                <paper-input class="card__name" name="titulo" label="Título" required>Título</paper-input>
+                                <paper-input class="card__name" name="title" label="Título" required>Título</paper-input>
                                 <paper-input class="card__link" name="link" label="Link" required>Link</paper-input>
-                                <iron-autogrow-textarea class="card__post" rows="4" placeholder="Resumen del Post"></iron-autogrow-textarea>
+                                <iron-autogrow-textarea class="card__post" rows="4" name="content" placeholder="Resumen del Post"></iron-autogrow-textarea>
                                 <div class="ripple-con">
                                     <input class="btn" type="submit" name="publish" value="Publicar">
                                     <span class="ripple"></span>
@@ -302,37 +275,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </paper-card>
                 </section>
             </div>
-            <paper-fab icon="add" class="fixed"></paper-fab>
+            <a href="offer.php"><paper-fab icon="add" class="fixed"></paper-fab></a>
         </paper-scroll-header-panel>
     </paper-drawer-panel>
 
-    <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-    </paper-toast>
 
-    <!-- Uncomment next block to enable Service Worker support (1/2) -->
-    <!--
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
 
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap"
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="fastest"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-    -->
 
-  </template>
-
-  <!-- build:js scripts/app.js -->
+  
   <script src="scripts/settings.js"></script>
-  <!-- endbuild-->
+  
 </body>
 
 </html>
